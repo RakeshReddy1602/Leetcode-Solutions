@@ -1,5 +1,5 @@
 class Solution {
-    public int numEnclaves(int[][] grid) {
+    public int numEnclaves(int[][] grid)  {
         for(int i =0;i<grid[0].length;i++){
             if(grid[0][i] == 1){
                 clearLandCells(0,i,grid);
