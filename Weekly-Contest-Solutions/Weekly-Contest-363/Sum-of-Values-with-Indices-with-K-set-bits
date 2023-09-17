@@ -1,1 +1,24 @@
-
+class Solution {
+    public int sumIndicesWithKSetBits(List<Integer> nums, int k) {
+        int sum = 0;
+        for(int i =0;i<nums.size();i++){
+            if(getBits(i,k)){
+                sum += nums.get(i);
+            }
+        }
+        return sum;
+    }
+    
+    
+    boolean getBits(int index,int k){
+        int count = 0;
+        for(int i =0;i<32;i++){
+            int val = index&1;
+            if(val == 1){
+                count++;
+            }
+            index = index >> 1;
+        }
+        return count == k;
+    }
+}
