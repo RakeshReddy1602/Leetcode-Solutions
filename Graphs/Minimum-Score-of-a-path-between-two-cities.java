@@ -1,17 +1,14 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-
 class Solution {
     public int minScore(int n, int[][] roads) {
         List<List<Pair>> adj = new ArrayList<>();
         Queue<Pair> queue = new LinkedList<>();
-        boolean[] vis = new boolean[n];
+        int[] vis = new int[n+1];
+        Arrays.fill(vis,Integer.MAX_VALUE);
         int minCost = Integer.MAX_VALUE;
-        for(int i =0;i<n;i++){
+        for(int i =0;i<=n;i++){
             adj.add(new ArrayList<>());
         }
-        for(inti =0;i<roads.length;i++){
+        for(int i = 0;i<roads.length;i++){
             int node1 = roads[i][0];
             int node2 = roads[i][1];
             int cost = roads[i][2];
@@ -19,15 +16,14 @@ class Solution {
             adj.get(node2).add(new Pair(node1,cost));
         }
         queue.add(new Pair(1,Integer.MAX_VALUE));
-        vis[0] = true;
+        // vis[0] = Integer.MAX_VALUE;
         while(!queue.isEmpty()){
             int node = queue.peek().node;
             minCost = Math.min(minCost,queue.poll().cost);
             for(Pair p :adj.get(node)){
-                if(!vis[p.node]){
-                    vis[p.node] = true;
+                if(vis[p.node] > p.cost){
+                    vis[p.node] = p.cost;
                     queue.add(new Pair(p.node,p.cost));
-
                 }
             }
         }
